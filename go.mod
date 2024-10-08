@@ -1,14 +1,16 @@
 module github.com/15226124477/posefile
 
-go 1.22.0
+go 1.23.0
+
+toolchain go1.23.1
 
 require (
-	github.com/15226124477/coord v0.0.0-20240904084245-446d856e8a25
-	github.com/15226124477/define v0.0.0-20240904090259-ef1913ec436a
-	github.com/15226124477/method v0.0.0-20240904083959-95e7ce9ae779
+	github.com/15226124477/coord v0.0.0-20240920054853-b2a71c2bc15b
+	github.com/15226124477/define v0.0.0-20240909025856-c0c000fa0072
+	github.com/15226124477/method v0.0.0-20240926033415-cdf492ebfd06
 	github.com/sirupsen/logrus v1.9.3
 	github.com/xuri/excelize/v2 v2.8.1
-	golang.org/x/text v0.17.0
+	golang.org/x/text v0.19.0
 )
 
 require (
