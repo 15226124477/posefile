@@ -286,7 +286,7 @@ func (pf *PosFile) getSolStatistic() {
 func (pf *PosFile) getDiffStatistic(solDiff []float64) {
 	diffDic := method.ListCount(solDiff)
 	// start.Debug(diffDic)
-	for arr, hash := range diffDic {
+	for arr, hash := range diffDic.([]float64) {
 		if hash >= 1 {
 			if arr <= 1 {
 				pf.DiffInfo.Diff1 = pf.DiffInfo.Diff1 + int64(hash)
