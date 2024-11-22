@@ -480,9 +480,9 @@ func (pf *PosFile) getFixStatistic() {
 		html.RefZ = fmt.Sprintf("%.3f", pf.PointAve.CoordinateNEZ.Z)
 	} else {
 		html.Mode = "外符合"
-		html.RefN = fmt.Sprintf("%.3f", pf.PointAve.N)
-		html.RefE = fmt.Sprintf("%.3f", pf.PointAve.E)
-		html.RefZ = fmt.Sprintf("%.3f", pf.PointAve.CoordinateNEZ.Z)
+		html.RefN = fmt.Sprintf("%.3f", pf.PointRef.N)
+		html.RefE = fmt.Sprintf("%.3f", pf.PointRef.E)
+		html.RefZ = fmt.Sprintf("%.3f", pf.PointRef.CoordinateNEZ.Z)
 	}
 	fmt.Println(html.Mode)
 	fmt.Println(pf.PointRef.N)
@@ -514,6 +514,10 @@ func (pf *PosFile) getFixStatistic() {
 		} else if pf.IsAveLimit == false {
 			for j := 0; j < len(pf.PointRefs); j++ {
 				if math.Sqrt(math.Pow(pf.FixPointData[i].N-pf.PointRefs[j].CoordinateNEZ.N, 2)+math.Pow(pf.FixPointData[i].E-pf.PointRefs[j].CoordinateNEZ.E, 2)) < pf.LimitInfo.ErrPlane && math.Abs(pf.FixPointData[i].CoordinateNEZ.Z-pf.PointRefs[j].CoordinateNEZ.Z) <= pf.LimitInfo.ErrAltitude {
+					pf.PointRef = pf.PointRefs[j]
+					html.RefN = fmt.Sprintf("%.3f", pf.PointRef.N)
+					html.RefE = fmt.Sprintf("%.3f", pf.PointRef.E)
+					html.RefZ = fmt.Sprintf("%.3f", pf.PointRef.CoordinateNEZ.Z)
 					fi.DeltaN = fmt.Sprintf("%.3f", math.Sqrt(math.Pow(pf.FixPointData[i].N-pf.PointRef.CoordinateNEZ.N, 2)))
 					fi.DeltaE = fmt.Sprintf("%.3f", math.Sqrt(math.Pow(pf.FixPointData[i].E-pf.PointRef.CoordinateNEZ.E, 2)))
 					fi.DeltaZ = fmt.Sprintf("%.3f", math.Sqrt(math.Pow(pf.FixPointData[i].CoordinateNEZ.Z-pf.PointRef.CoordinateNEZ.Z, 2)))

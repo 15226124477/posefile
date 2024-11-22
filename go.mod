@@ -6,6 +6,7 @@ require (
 	github.com/15226124477/coord v0.0.0-20241008033706-13bb0d1ca3ad
 	github.com/15226124477/define v0.0.0-20240909025856-c0c000fa0072
 	github.com/15226124477/method v0.0.0-20241018033844-8c84722329a1
+	github.com/go-echarts/go-echarts/v2 v2.4.5
 	github.com/sirupsen/logrus v1.9.3
 	github.com/xuri/excelize/v2 v2.9.0
 	golang.org/x/text v0.19.0
@@ -28,6 +29,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mholt/archiver v3.1.1+incompatible // indirect
