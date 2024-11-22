@@ -480,10 +480,14 @@ func (pf *PosFile) getFixStatistic() {
 		html.RefZ = fmt.Sprintf("%.3f", pf.PointAve.CoordinateNEZ.Z)
 	} else {
 		html.Mode = "外符合"
-		html.RefN = fmt.Sprintf("%.3f", pf.PointRef.N)
-		html.RefE = fmt.Sprintf("%.3f", pf.PointRef.E)
-		html.RefZ = fmt.Sprintf("%.3f", pf.PointRef.CoordinateNEZ.Z)
+		html.RefN = fmt.Sprintf("%.3f", pf.PointAve.N)
+		html.RefE = fmt.Sprintf("%.3f", pf.PointAve.E)
+		html.RefZ = fmt.Sprintf("%.3f", pf.PointAve.CoordinateNEZ.Z)
 	}
+	fmt.Println(html.Mode)
+	fmt.Println(pf.PointRef.N)
+	fmt.Println(pf.PointRef.E)
+	fmt.Println(pf.PointRef.CoordinateNEZ.Z)
 	fixInfo := make([]coord.FixInterval, 0)
 
 	for i := 0; i < len(pf.FixPointData); i++ {
