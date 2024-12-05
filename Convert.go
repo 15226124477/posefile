@@ -90,10 +90,11 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 	mayIntervals := method.ListCount(intervals)
 	mayInterval := 0.0
 	maxCount := 0.0
-	for k, v := range mayIntervals.([]float64) {
-		if v > maxCount {
+
+	for k, v := range mayIntervals.(map[float64]int) {
+		if float64(v) > maxCount {
 			mayInterval = float64(k)
-			maxCount = v
+			maxCount = float64(v)
 		}
 
 		log.Info("频率:", k, "次数:", v)
