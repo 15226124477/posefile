@@ -14,19 +14,7 @@ import (
 	"time"
 )
 
-type PosTask struct {
-	pointFileArgs PosFileArgs
-	pointFileId   int
-}
-
-type PosConvertEngine struct {
-	PosFileRootDirectory string        // 数据输入根路径
-	PosFileOutDirectory  string        // 数据导出根路径
-	PosTask              []PosFileArgs // 可执行的样本集
-}
 type PosFileArgs struct {
-	IsDebug bool
-
 	IFilePath string // 输入原始数据文件路径
 
 	OGGAFilePath  string // 导出GGA路径
@@ -41,9 +29,6 @@ type PosFileArgs struct {
 	BasicMonth int // GGA 丢失的月
 	BasicDay   int // GGA 丢失的日
 
-	RawGGA  []string // 原始GGA数据
-	RawSOL  []string // 原始SOL文件
-	RawGNSS []string // 原始GNSS文件
 	// rawPOS    []string      // 原始POS数据
 	BasicPosInfo []PointData // 基础数据类型
 
@@ -89,9 +74,8 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 			rinexTime := time.Date(year, time.Month(month), day, hour, minute, int(seconds), int(1000*1000*mircosecond), time.UTC)
 			pt.GPST = rinexTime
 			pt.Sat.SatNum = sat
-			if pFile.IsDebug {
-				log.Info(pt.GPST.Format("2006-01-02 15:04:05.000"), "\t", pt.Sat)
-			}
+			log.Info(pt.GPST.Format("2006-01-02 15:04:05.000"), "\t", pt.Sat)
+
 			pFile.BasicPosInfo = append(pFile.BasicPosInfo, pt)
 		}
 
@@ -99,9 +83,8 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 	intervals := make([]float64, 0)
 	for i := 1; i < len(pFile.BasicPosInfo); i++ {
 		interval := pFile.BasicPosInfo[i].GPST.Sub(pFile.BasicPosInfo[i-1].GPST).Seconds()
-		if pFile.IsDebug {
-			log.Info(pFile.BasicPosInfo[i-1].GPST.Format("2006-01-02 15:04:05.000"), " ", pFile.BasicPosInfo[i].GPST.Format("2006-01-02 15:04:05.000"), " ", interval)
-		}
+		log.Info(pFile.BasicPosInfo[i-1].GPST.Format("2006-01-02 15:04:05.000"), " ", pFile.BasicPosInfo[i].GPST.Format("2006-01-02 15:04:05.000"), " ", interval)
+
 		intervals = append(intervals, interval)
 	}
 	mayIntervals := method.ListCount(intervals)
@@ -112,9 +95,9 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 			mayInterval = float64(k)
 			maxCount = v
 		}
-		if pFile.IsDebug {
-			log.Info("频率:", k, "次数:", v)
-		}
+
+		log.Info("频率:", k, "次数:", v)
+
 	}
 
 	xlist := make([]time.Time, 0)
@@ -185,9 +168,8 @@ func (pFile *PosFileArgs) ToLostReport() {
 	// 写入文件头
 	for i := 0; i < len(pFile.LostInfo); i++ {
 		var writeLine = pFile.LostInfo[i]
-		if pFile.IsDebug {
-			log.Info(writeLine)
-		}
+		log.Info(writeLine)
+
 		_, err2 := writer.WriteString(writeLine)
 		if err2 != nil {
 			return
