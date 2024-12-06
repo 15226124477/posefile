@@ -74,7 +74,7 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 			rinexTime := time.Date(year, time.Month(month), day, hour, minute, int(seconds), int(1000*1000*mircosecond), time.UTC)
 			pt.GPST = rinexTime
 			pt.Sat.SatNum = sat
-			log.Info(pt.GPST.Format("2006-01-02 15:04:05.000"), "\t", pt.Sat)
+			// log.Info(pt.GPST.Format("2006-01-02 15:04:05.000"), "\t", pt.Sat)
 
 			pFile.BasicPosInfo = append(pFile.BasicPosInfo, pt)
 		}
@@ -83,7 +83,7 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 	intervals := make([]float64, 0)
 	for i := 1; i < len(pFile.BasicPosInfo); i++ {
 		interval := pFile.BasicPosInfo[i].GPST.Sub(pFile.BasicPosInfo[i-1].GPST).Seconds()
-		log.Info(pFile.BasicPosInfo[i-1].GPST.Format("2006-01-02 15:04:05.000"), " ", pFile.BasicPosInfo[i].GPST.Format("2006-01-02 15:04:05.000"), " ", interval)
+		// log.Info(pFile.BasicPosInfo[i-1].GPST.Format("2006-01-02 15:04:05.000"), " ", pFile.BasicPosInfo[i].GPST.Format("2006-01-02 15:04:05.000"), " ", interval)
 
 		intervals = append(intervals, interval)
 	}
@@ -169,7 +169,7 @@ func (pFile *PosFileArgs) ToLostReport() {
 	// 写入文件头
 	for i := 0; i < len(pFile.LostInfo); i++ {
 		var writeLine = pFile.LostInfo[i]
-		log.Info(writeLine)
+		// log.Info(writeLine)
 
 		_, err2 := writer.WriteString(writeLine)
 		if err2 != nil {
