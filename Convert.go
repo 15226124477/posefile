@@ -93,7 +93,7 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 
 	for k, v := range mayIntervals.(map[float64]int) {
 		if float64(v) > maxCount {
-			mayInterval = float64(k)
+			mayInterval = k
 			maxCount = float64(v)
 		}
 
@@ -133,7 +133,7 @@ func (pFile *PosFileArgs) LoadRawRinex() {
 
 	log.Debug("文件频率:", mayInterval, "s")
 
-	pFile.integrityRate = 100.0 * (float64(len(pFile.BasicPosInfo))) / (float64(len(pFile.BasicPosInfo)) + float64(lostSum))
+	pFile.integrityRate = 100.0 * (float64(len(pFile.BasicPosInfo))) / (float64(len(pFile.BasicPosInfo)) + lostSum)
 	log.Debug("完整率:", pFile.integrityRate, "%")
 	pFile.LostInfo = append(pFile.LostInfo, fmt.Sprintf("************************************************************************************\r\n文件路径:%s\r\n起始时间:%s\r\n结束时间:%s\r\n历元总数:%d\r\n采样间隔:%.4fs\r\n完整率:%.4f%%\r\n******************************************\r\n",
 		pFile.IFilePath,
