@@ -638,7 +638,7 @@ func (pf *PosFile) getRealStatistic() {
 	if len(realPointDeltaNE) > 0 {
 
 		// 1sigma
-		numSigma1 := math.Ceil(float64(len(realPointDeltaNE))*0.950) - 1
+		numSigma1 := math.Ceil(float64(len(realPointDeltaNE))*0.682) - 1
 		numSigma2 := math.Ceil(float64(len(realPointDeltaNE))*0.955) - 1
 		numSigma3 := math.Ceil(float64(len(realPointDeltaNE))*0.997) - 1
 		sort.Float64s(realPointDeltaNE)
